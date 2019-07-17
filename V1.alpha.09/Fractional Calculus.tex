@@ -1,0 +1,186 @@
+\documentclass[cn,11pt,color=green,titlestyle=hang,mode=fancy,cite=numbers]{elegantbook}
+
+\title{分数阶微积分}
+\subtitle{Fractional Calculus}
+
+\author{JiPan}
+\institute{Harbin Institute of Technology}
+\myemail{jipan\_2014@126.com}
+\date{\today}
+\version{V1.alpha.0.8}
+
+\extrainfo{这书我没写过，不过确实在理 ——— ah Q LuXun}
+
+\usepackage{makecell}
+\usepackage{lipsum}
+\usepackage{texnames}
+\usepackage{amsmath,amsfonts}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{cellspace}%
+\setlength\cellspacetoplimit{3pt}
+\setlength\cellspacebottomlimit{3pt}
+\usepackage{makecell}
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+\usepackage{pstricks}
+\usepackage{pstricks-add}
+\usepackage{mathtools}
+
+\setcellgapes{3pt}
+
+\RequirePackage{amsmath}
+
+\hfuzz=\maxdimen
+\tolerance=10000
+\hbadness=10000
+
+\newcommand{\hint}[1]{\textbf{\textcolor[rgb]{1,0,0}{#1}}}
+\newcommand{\under}[1]{\underline{#1}}
+\newcommand{\chapterno}[1]{\chapter*{#1}  \addcontentsline{toc}{chapter}{#1}}
+\newcommand{\vm}[1]{\textbf{\textit{#1}}}
+\newcommand{\vmo}[1]{\overline{\textbf{\emph{#1}}}}
+
+\logo{logo.png}
+\cover{cover.jpg}
+
+\begin{document}
+
+	\maketitle
+
+	\chapterno{序}
+	\chapterno{前言}
+	
+	% \addcontentsline{toc}{chapter}{目\hspace{2em}录 }
+	\tableofcontents
+
+	\mainmatter
+	\hypersetup{pageanchor=true}
+	
+
+	
+	\chapterno{符号表}
+	
+	符号表、符号规定
+	
+	偶数空一页
+	
+	附录A
+	
+	参考文献
+	
+    重要字体颜色
+	
+	目录级别（三级）
+	
+	1.1.1.1
+	
+	\part{微积分基础（含线性代数、概率统计和实、复变函函数）}
+	
+		\chapter{初等数学}
+		
+		\chapter{微积分}
+		
+		\chapter{线性代数}
+		
+		\chapter{概率论}
+		
+		\chapter{统计学}
+	
+		\include{part1/chap6}  % 复变函数
+		
+	\part{微分方程(含数理方程和特殊函数)}
+	
+    	%\include{part2/chap1}  % 常微分方程
+    	
+    	%\include{part2/chap2}  % 分析力学基础
+    	
+    	% \include{part2/chap3}  % 数理方程的基础理论
+    	 
+    	
+	\part{微分方程数值解法}
+	
+    	%\include{part3/chap1}  % 有限差分法
+    	
+		\chapter{有限体积法}
+		
+		\chapter{有限元法}
+
+		\chapter{谱方法}
+		
+		\chapter{小波变换}
+		
+		\chapter{其他方法}
+			\section{蒙特卡洛方法}
+				
+	\part{分数阶微分}
+		%  \include{part4/chap1}  %
+		
+		
+	\part{分数阶积分}
+	
+	
+	\part{Elegant\LaTeX{} 系列}
+	
+	%	\include{eleexample}
+	
+
+	\nocite{*} 
+	\addcontentsline{toc}{chapter}{参考文献}
+	
+	\bibliography{reference}
+	
+
+	\appendix
+	
+	\chapter{基本数学工具}
+	
+	本附录包括了计量经济学中用到的一些基本数学，我们扼要论述了求和算子的各种性质，研究了线性和某些非线性方程的性质，并复习了比例和百分数。我们还介绍了一些在应用计量经济学中常见的特殊函数，包括二次函数和自然对数，前 4 节只要求基本的代数技巧，第 5 节则对微分学进行了简要回顾；虽然要理解本书的大部分内容，微积分并非必需，但在一些章末附录和第 3 篇某些高深专题中，我们还是用到了微积分。
+	
+	\section{求和算子与描述统计量}
+	
+	\textbf{求和算子} 是用以表达多个数求和运算的一个缩略符号，它在统计学和计量经济学分析中扮演着重要作用。如果 $\{x_i: i=1, 2, \ldots, n\}$ 表示 $n$ 个数的一个序列，那么我们就把这 $n$ 个数的和写为：
+	
+	\begin{equation}
+	\sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
+	\end{equation}
+	
+	\chapter{线性代数}
+	
+	\chapter{最小示例}
+	
+	\begin{lstlisting}
+	\documentclass[lang=cn,11pt]{elegantbook}
+	% title info
+	\title{Title}
+	\subtitle{Subtitle is here}
+	% bio info
+	\author{Your Name}
+	\institute{XXX University}
+	\date{\today}
+	% extra info
+	\version{1.00}
+	\extrainfo{Victory won\rq t come to us unless we go to it. --- M. Moore}
+	\logo{logo.png}
+	\cover{cover.jpg}
+	
+	\begin{document}
+	
+	\maketitle
+	\tableofcontents
+	\mainmatter
+	\hypersetup{pageanchor=true}
+	% add preface chapter here if needed
+	\chapter{Example Chapter Title}
+	The content of chapter one.
+	
+	\bibliography{reference}
+	
+	\chapterno{索引}
+	
+	\end{document}
+	\end{lstlisting}
+
+
+\end{document}

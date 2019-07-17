@@ -1,0 +1,96 @@
+\chapter{有限差分法}
+  
+\begin{introduction}   
+\item 特殊函数
+\item 分数阶微积分的定义
+\item 分数阶微积分的基本性质
+\end{introduction}
+
+\section{差分法基本概念}
+\subsection{有限差分法的数值差分}
+
+定义当$x=x_i$，$u(x_i) = u_i$。即下标$i$表示$x=x_i$时$u(x)$的值。类似的$u_{i,j,k}^{n}$表示$x=x_i,y=y_j,z=z_k,t=t_n$时$u(x,y,z)$的值。有时候上标$n$也表示迭代次数，具体问题看是否出现时间项。若出现时间项，一般是表示$t=t_n$,也有可能有双上标，即既有时间项也有迭代次数。若没有出现时间项，则必然表示迭代次数。
+
+对于一维问题，求解区域为$x \in [a,b] $,这里讲区间等分为$N$等分,则$x$方向步长为$\Delta x = (b-a)/N$,则
+$$x_i = a+i\Delta x,i=0,1,2,\cdots, N$$
+常见的一维差商问题有一下几种类型：
+
+(1)一阶导数向前差商：误差为$ \mathcal{O}(\Delta x)$，其中$0 \le i \le N-1$.
+\begin{equation}
+	u'(x_i) = \frac{1}{\Delta x}\left[u(x_{i+1})-u(x_i)\right] \Leftrightarrow u'_i  = \frac{1}{\Delta x}\left[u_{i+1}-u_i\right]
+\end{equation} 
+
+
+\section{差分法二维扩散方程中的应用}
+
+\subsection{一维扩散方程}
+
+有限域的一维扩散方程的表达式为
+$$ \frac{\partial u}{\partial t} = \alpha \frac{\partial u^2}{\partial x^2}$$
+
+\subsection{1D Crank-Nicolson method} 
+The Crank–Nicolson method ~\cite{Wiki-Crank-Nicolson-Method} is often applied to diffusion problems. As an example, for linear diffusion,
+$$ {\partial u \over \partial t}=\alpha {\frac  {\partial ^{2}u}{\partial x^{2}}} $$
+applying a finite difference spatial discretization for the right hand side, the Crank–Nicolson discretization is then:
+$${\frac{u_{i}^{n+1}-u_{i}^{n}}{\Delta t}}={\frac{\alpha}{2(\Delta x)^{2}}}((u_{i+1}^{n+1}-2u_{i}^{n+1}+u_{i-1}^{n+1})+(u_{i+1}^{n}-2u_{i}^{n}+u_{i-1}^{n}))$$
+or, letting ${\displaystyle r={\frac {\alpha \Delta t}{2(\Delta x)^{2}}}}$:
+$$-ru_{{i+1}}^{{n+1}}+(1+2r)u_{{i}}^{{n+1}}-ru_{{i-1}}^{{n+1}}=ru_{{i+1}}^{{n}}+(1-2r)u_{{i}}^{{n}}+ru_{{i-1}}^{{n}}$$
+given that the terms on the right-hand side of the equation are known, this is a tridiagonal problem, so that ${\displaystyle u_{i}^{n+1}\,}$, may be efficiently solved by using the tridiagonal matrix algorithm in favor of a much more costly matrix inversion.
+
+A quasilinear equation, such as (this is a minimalistic example and not general)
+$${\frac  {\partial u}{\partial t}}=\alpha(u){\frac  {\partial ^{2}u}{\partial x^{2}}}$$
+would lead to a nonlinear system of algebraic equations which could not be easily solved as above; however, it is possible in some cases to linearize the problem by using the old value for $\alpha$, that is $\alpha_{{i}}^{{n}}(u)$, instead of $ \alpha_{{i}}^{{n+1}}(u)$. Other times, it may be possible to estimate $\alpha_{{i}}^{{n+1}}(u)$, using an explicit method and maintain stability.
+
+\subsection{Leap-Frog method}
+
+
+
+\section{差分法二维扩散方程中的应用}
+
+\subsection{二维扩散方程}
+
+有限域的二维扩散方程的是一个在空间上为椭圆型微分方程，在空间上为双曲型微分方程，其典型的表达式为
+$$ \frac{\partial u}{\partial t} = \alpha \nabla ^2 u = \alpha \Delta u = \alpha (\frac{\partial u^2}{\partial x^2}+\frac{\partial ^2 u}{\partial y^2}),\qquad \alpha>0 $$
+
+Domain: $(x,y) \in \Omega \subset \mathbb {R}^2 $ and $t>0$,$\Gamma_D$ is the boundary of $\Omega$.
+
+Initial condtion:
+\begin{itemize}
+	\itemsep=4pt
+	\parskip=2pt
+	\item (1) Dirichlet initial condition: 
+	$$u(t=0,x,y)|_{(x,y) \in \Omega}=\varphi_0(x,y)$$
+	\item (2) Neumann initial condition:
+	 $$ \vm{D} \cdot \nabla u(t=0,x,y)|_{(x,y) \in \Omega} = \frac{\partial u}{\partial \vm{n}} = q_0(x,y)$$
+	\item (3) Robin initial condition:
+	$$ a u(t=0,x,y)_{(x,y) \in \Gamma_D} +b \frac{\partial u(t=0,x,y)}{\partial \vm{n}}_{(x,y) \in \Gamma_D} = g(x,y)$$
+\end{itemize}
+	
+Boundary condition:
+\begin{itemize}
+	\itemsep=4pt
+	\parskip=2pt
+	\item (1) Dirichlet boundary condition: 
+	$$u(t,x,y)|_{(x,y) \in \Gamma_D}=\varphi_0(x,y)$$
+	\item (2) Neumann boundary condition:
+	$$ \vm{D} \cdot \nabla u(u,x,y)|_{(x,y) \in \Gamma_D} = \frac{\partial u}{\partial \vm{n}} = q_0(x,y)$$
+	\item (3) Robin boundary condition:
+	$$ a u(t,x,y)_{(u,x,y) \in \Gamma_D} +b \frac{\partial u}{\partial \vm{n}}_{(x,y) in \Gamma_D} = g(x,y)$$
+	\item (4) Mixed boundary condition：
+
+	\item (5) Cauchy boundary condition:
+	
+\end{itemize}	
+	
+	
+	
+	
+	
+	 
+\subsection{Crank-Nicolson method}
+
+
+
+\subsection{Leap-Frog method}
+
+

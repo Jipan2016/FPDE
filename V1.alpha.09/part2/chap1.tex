@@ -1,0 +1,222 @@
+\chapter{常微分方程}
+
+\begin{introduction}       
+	\item 绪论
+	\item 一阶常微分方程的初等解法
+	\item 一阶常微分方程解得存在定理
+	\item 高阶常微分方程 
+	\item 一阶常微分方程组
+	\item 非线性微分方程
+	\item 一阶线性偏微分方程组		
+\end{introduction}
+
+\section{绪论}
+
+若函数未知，但知道自变量、未知函数及函数的导数(或微分)组成的关系式，得到的便是\hint{微分方程}，通过求解微分方求出未知函数。自变量只有一个的微分方程称为\hint{常微分方程}，含有多个自变量的微分方程称为\hint{偏微分方程}。
+
+\subsection{常微分方程模型}
+
+\subsubsection{1.RLC电路}
+$$
+\frac{\mathrm{d^2}I(t)}{\mathrm{d}t^2}+\frac{R}{L}\frac{\mathrm{d}I(t)}{\mathrm{d}t}+\frac{I(t)}{LC} = \frac{1}{L}\frac{\mathrm{d}e(t)}{\mathrm{d}t}
+$$
+
+\subsubsection{2. 数学摆}
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d^2}\varphi(t)}{\mathrm{d}t^2}+\frac{\mu}{m}\frac{\mathrm{d}\varphi(t)}{\mathrm{d}t}+\frac{g}{l}\sin(\varphi(t)) = \frac{1}{ml}F(t)\\
+{}&\varphi(0) =\varphi_0\\
+{}&\frac{\mathrm{d}\varphi(0)}{\mathrm{d}t}=\omega_0\\
+\end{aligned}
+\right. 
+$$
+
+\subsubsection{3.人口模型}
+
+(1) Malthus:
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{N(t)}{\mathrm{d}t} = rN(t)\\
+{}&N(t_0) = N_0\\
+\end{aligned}
+\right. 
+$$
+
+此微分方程的解为
+$$
+N(t) = N_0e^{r(t-t_0)}. 
+$$
+
+(2) Logistic:
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{N(t)}{\mathrm{d}t} = rN(t)(1-\frac{N(t)}{N_m})\\
+{}&N(t_0) = N_0\\
+\end{aligned}
+\right. 
+$$
+
+此微分方程的解为
+$$
+N(t) = N_m\frac{e^{r(t-t_0)}N_0}{N_m-N_0+e^{r(t-t_0)}N_0}
+$$
+
+\subsubsection{4.传染病模型}
+
+(1) SI模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = ky(t)x(t)=kx(t)(n-x(t))\\
+{}&x(0) = x_0\\
+\end{aligned}
+\right. 
+$$
+
+(2) SIS模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = ky(t)x(t)-\mu x(t)=kx(t)(n-x(t)-\frac{\mu}{k})\\
+{}&x(0) = x_0\\
+\end{aligned}
+\right. 
+$$
+
+(3) SIR模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = ky(t)x(t)-\frac{\mathrm{d}r(t)}{\mathrm{d}t}=kx(t)y(t)-lx(t), \qquad& {} &  x(0) = x_0   \\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = -kx(t)y(t), \qquad          & {} & y(0) = y_0 = n-x_0  \\
+\end{aligned}
+\right. 
+$$
+
+\subsubsection{5.两生物种群生态模型}
+
+(1) Volterra被捕食-捕食模型$(a,b,c,d>0)$
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = x(a-by)\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = y(-c+dx)\\
+\end{aligned}
+\right. 
+$$
+
+(2) 竞争模型$(a,b,c,d>0)$
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = x(a-by)\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = y(c-dx)\\
+\end{aligned}
+\right. 
+$$
+
+(3) 共生模型$(a,b,c,d>0)$
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = x(a+by)\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = y(c+dx)\\
+\end{aligned}
+\right. 
+$$
+
+(4) Volterra模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = x(a+bx+cy) = M(x,y)x\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = y(d+ex+fy) = N(x,y)x\\
+\end{aligned}
+\right. 
+$$
+
+\subsubsection{6.Lorenz方程(分支和混沌)}
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = a(y-x)\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = -xz+cx-y \\
+{}&\frac{\mathrm{d}z(t)}{\mathrm{d}t} = xy-bz \\
+\end{aligned}
+\right. 
+$$
+其中参数为$a=10,b=8/3,c=28$
+
+\subsubsection{7.化学动力学模型}
+
+(1) Schlogt单分子化学动力学模型
+$$
+\frac{\mathrm{d}x}{\mathrm{d}t} = -k_3x^3+k_2Ax^2-k_1x+k_0B
+$$
+
+(2) 双分子化学动力学模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = k_1Ax-k_2xy\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = k_2xy-k_3y\\
+\end{aligned}
+\right. 
+$$
+
+(3) 3分子化学动力学模型
+$$
+\left\{ 
+\begin{aligned}
+{}&\frac{\mathrm{d}x(t)}{\mathrm{d}t} = A-(B+1)X+x^2y\\
+{}&\frac{\mathrm{d}y(t)}{\mathrm{d}t} = Bx-x^2y
+\end{aligned}
+\right. 
+$$
+
+\subsubsection{8.力学系统中的常微分方程模型}
+
+(1) 牛顿力学
+$$
+\left\{ 
+\begin{aligned}
+{}& m \frac{\mathrm{d}\vec{r}}{\mathrm{d}t}=\vec{F}(t) \\
+{}& J_c \frac{\mathrm{d}\vec{\theta}}{\mathrm{d}t} =\vec{M}(\vec{F}(t))  \\
+\end{aligned}
+\right. 
+\left\{ 
+\begin{aligned}
+{}&m \frac{\mathrm{d}x(t)}{\mathrm{d}t} = F_x(t)\\
+{}&m \frac{\mathrm{d}y(t)}{\mathrm{d}t} = F_x(t)\\
+{}&J_c \frac{\mathrm{d}\theta_z(t)}{\mathrm{d}t} = M_c(\vec{F(t)})\\
+\end{aligned}
+\right. 
+\left\{ 
+\begin{aligned}
+{}&m a_t = F_t(t)\\
+{}&m a_n = F_n(t)\\
+{}&J_c \frac{\mathrm{d}\theta_z(t)}{\mathrm{d}t} = M_c(\vec{F(t)})\\
+\end{aligned}
+\right. 
+$$
+
+(2) 拉格朗日力学
+
+研究质点在三维欧氏空间中的运行，一个有势的牛顿力学系可以用质点的质量和力学系统的位能表达出来，牛顿运动方程使我们能完全解出一系列重要的力学问题。对有完整约束的力学系统，可以通过引进广义坐标($\varphi_1,\varphi_2,\cdots,\varphi_n$)接触约束，从而牛顿力学进行为拉格朗日力学。拉格朗日力学是利用一个拉格朗日函数$L(q_1,q_2 ,\cdots,q_n)$刻画系统，把力学系统的求解归结为在相应的坐标领域内求拉格朗日方程
+$$
+	\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}_i} -\frac{\partial L}{\partial q _i} = 0
+$$
+
+(3) 哈密顿力学
+
+\subsection{基本概念和常微分方程的发展历史}
+
+\section{一阶常微分方程的初等解法}
+\section{一阶常微分方程解得存在定理}
+\section{高阶常微分方程}
+\section{一阶常微分方程组}
+\section{非线性微分方程}
+\section{一阶线性偏微分方程组}	
